@@ -21,11 +21,19 @@ version should bump
 
 ### publishing
 
-Because we don't have an npm repository internal to entercom (that I know of)
-we'll need to make sure the publishing step is taken care of by creating a tag
-with the published content.  That tag will be what unity points to in their
-package.json.  If I have time I will try to isolate that logic into a
-package.json script.
+The process for publishing a new version is to
+
+1. merge all changes into the branch `master-unity` which are intended to go
+   into the new version
+2. create a new commit in the branch 'master-unity' where you bump
+   the {unity version} in both package.json and package-lock.json
+3. run `node -r esm scripts/unity-publish`
+   - I also exposed this via `npm run unity-publish` but I suggest you run it
+     directly to avoid all the npm error noise in case anything goes wrong.
+   - Be aware this script assumes a remote named `entercom` exists in your repo
+     and that you have access to push to it.
+   - If you have any questions about this script or it doesn't work to your
+     expectations, please let me (Phil) know.
 
 ## Below is the rest of the vanilla clay-kiln readme
 
