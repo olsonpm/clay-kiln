@@ -135,7 +135,7 @@
       </form>
       <span class="action-info-message">Time Zone: {{ timezone }}</span>
       <ui-button v-if="showSchedule" :disabled="disableSchedule || hasErrors" class="action-button" buttonType="button" color="orange" @click.stop="scheduleLayout">{{ actionMessage }}</ui-button>
-      <ui-button v-else :disabled="hasErrors" class="action-button" buttonType="button" color="accent" @click.stop="publishLayout">{{ actionMessage }}</ui-button>
+      <ui-button v-else :disabled="isValidating || hasErrors" class="action-button" buttonType="button" color="accent" @click.stop="publishLayout">{{ actionMessage }}</ui-button>
       <span v-if="hasErrors" class="action-error-message" @click="goToHealth">Please fix errors before publishing</span>
       <span v-else-if="hasWarnings" class="action-warning-message" @click="goToHealth">Please review warnings before publishing</span>
     </div>
@@ -187,6 +187,7 @@
       hasWarnings: state => state.validation.warnings && state.validation.warnings.length > 0,
       isPublished: state => state.layout.state.published,
       isScheduled: state => state.layout.state.scheduled,
+      isValidating: state => state.isValidating,
       uri: state => state.layout.uri,
       publishedDate: state => state.layout.state.publishTime,
       createdDate: state => state.layout.state.createTime,
