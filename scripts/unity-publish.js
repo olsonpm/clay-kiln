@@ -57,7 +57,7 @@ run()
 
 async function run() {
   try {
-    let tags = (await execp('git fetch entercom --tags && git tag')).stdout
+    let tags = (await execp('git fetch olsonpm --tags && git tag')).stdout
 
     tags = tags.split('\n')
       .filter(_.identity)
@@ -120,7 +120,7 @@ async function run() {
         { cwd: publishDir }
       )
       await execp(
-        `git tag '${vVersion}' && git push entercom '${vVersion}'`,
+        `git tag '${vVersion}' && git push olsonpm '${vVersion}'`,
         { cwd: publishDir }
       )
 
